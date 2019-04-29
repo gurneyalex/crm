@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+
+<odoo>
+
+    <record id="crm_case_form_view_oppor" model="ir.ui.view">
+        <field name="name">crm.lead.form.oppor</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
+        <field name="arch" type="xml">
+            <field name="partner_id" position="before">
+              <field name="customer_currency_id"/>
+              <field name="is_same_currency" invisible="1"/>
+              <field name="amount_customer_currency" attrs="{'invisible': [('is_same_currency', '=', True)]}" />
+            </field>
+            <field name="planned_revenue" position="attributes">
+              <attribute name="attrs">{'readonly': [('is_same_currency', '=', False)]}</attribute>
+            </field>
+        </field>
+    </record>
+
+</odoo>

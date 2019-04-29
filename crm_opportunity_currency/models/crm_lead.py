@@ -23,7 +23,7 @@ class CrmLead(models.Model):
     )
 
     @api.onchange('customer_currency_id', 'amount_customer_currency')
-    def compute_expected_amount(self):
+    def _onchange_currency(self):
         for lead in self:
             lead.planned_revenue = lead.get_revenue_in_company_currency()
 
@@ -35,7 +35,7 @@ class CrmLead(models.Model):
         the planned revenue is computed in the company currency.
         """
         self.ensure_one()
-        if self.company_currency == self.customer_currency_id:
+        if self.is_same_currency:
             return self.planned_revenue
         return self.customer_currency_id._convert(
             self.amount_customer_currency or 0,

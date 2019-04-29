@@ -8,14 +8,12 @@
     'version': '12.0.1.0.0',
     'license': 'AGPL-3',
     'author': 'Camptocamp SA,Odoo Community Association (OCA)',
-    'website': 'www.camptocamp.com',
+    'website': 'https://github.com/OCA/crm',
     'depends': [
         'crm',
     ],
     'data': [
         'views/crm_lead_opportunity_currency_views.xml',
-    ],
-    'demo': [
     ],
     'installable': True,
 }

@@ -24,8 +24,7 @@ class CrmLead(models.Model):
 
     @api.onchange('customer_currency_id', 'amount_customer_currency')
     def _onchange_currency(self):
-        for lead in self:
-            lead.planned_revenue = lead.get_revenue_in_company_currency()
+        self.planned_revenue = self.get_revenue_in_company_currency()
 
     @api.multi
     def get_revenue_in_company_currency(self):

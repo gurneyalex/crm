@@ -15,7 +15,6 @@ class CrmLead(models.Model):
     amount_customer_currency = fields.Monetary(
         string='Customer amount',
         currency_field='customer_currency_id',
-        store=True,
     )
     is_same_currency = fields.Boolean(
         string='Same currency',

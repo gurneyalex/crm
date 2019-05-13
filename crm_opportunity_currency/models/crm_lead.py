@@ -43,22 +43,9 @@ class CrmLead(models.Model):
         )
 
     @api.multi
+    @api.depends('customer_currency_id', 'company_id.currency_id')
     def _compute_is_same_currency(self):
         for lead in self:
             lead.is_same_currency = (
                 lead.customer_currency_id == lead.company_currency
             )
-
-    @api.multi
-    def write(self, vals):
-        res = super().write(vals)
-        if (
-            'customer_currency_id' in vals
-            or 'amount_customer_currency' in vals
-        ):
-            # Due to the readonly in the view the compute does not work
-            for lead in self:
-                lead.write({
-                    'planned_revenue': lead.get_revenue_in_company_currency()
-                })
-        return res

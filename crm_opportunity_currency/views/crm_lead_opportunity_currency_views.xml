@@ -11,9 +11,12 @@
         <field name="customer_currency_id"/>
         <field name="is_same_currency" invisible="1"/>
         <field name="amount_customer_currency" attrs="{'invisible': [('is_same_currency', '=', True)]}" />
+        <!-- This to have the planned_revenue saved even when it is on readonly -->
+        <!-- As the force_save attribute added below does not work !? -->
+        <field name="planned_revenue" invisible="1"/>
       </field>
       <field name="planned_revenue" position="attributes">
-        <attribute name="attrs">{'readonly': [('is_same_currency', '=', False)]}</attribute>
+        <attribute name="attrs">{'readonly': [('is_same_currency', '=', False)], 'force_save': 1}</attribute>
       </field>
     </field>
   </record>
